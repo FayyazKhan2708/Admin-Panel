@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Center, Avatar, Button, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Avatar,
+  Button,
+  useToast,
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
 import PhoneNumber from "../components/PhoneNumber";
 import FormInput from "../components/FormInput";
 import PageLayout from "../components/layout/PageLayout";
@@ -147,21 +155,18 @@ const Settings = () => {
               placeholder="Enter your email"
             />
 
-            <FormInput
-              label="Phone Number"
-              isRequired
-              component={
-                <PhoneNumber
-                  value={formData.phoneNumber}
-                  onChange={(phone) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      phoneNumber: phone,
-                    }))
-                  }
-                />
-              }
-            />
+            <FormControl isRequired>
+              <FormLabel>Phone Number</FormLabel>
+              <PhoneNumber
+                value={formData.phoneNumber}
+                onChange={(phone) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    phoneNumber: phone,
+                  }))
+                }
+              />
+            </FormControl>
 
             <Button type="submit" colorScheme="teal" alignSelf="flex-end">
               Save Changes
