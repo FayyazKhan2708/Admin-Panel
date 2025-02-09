@@ -29,7 +29,7 @@ const ActivityChart = () => {
   return (
     <Box bg="white" p={6} rounded="lg" shadow="base">
       <Flex justifyContent="space-between" mb={6}>
-        <Heading size="md">Activity</Heading>
+        <Heading size="lg">Activity</Heading>
         <Flex gap={4}>
           <Select defaultValue="all-enterprises" w="200px">
             <option value="all-enterprises">All Enterprises</option>
