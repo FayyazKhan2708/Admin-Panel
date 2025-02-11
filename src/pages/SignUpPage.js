@@ -40,10 +40,27 @@ const SignUpPage = () => {
     }));
   };
 
+  const validatePasswords = () => {
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: "Passwords do not match",
+        description: "Please make sure your passwords match",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (!validatePasswords()) {
+      return;
+    }
 
+    console.log(formData);
     toast({
       title: "Account created successfully",
       description: "Please login with your credentials",

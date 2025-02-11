@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 
 const PasswordInput = ({
@@ -15,12 +16,14 @@ const PasswordInput = ({
   onChange,
   placeholder,
   isRequired = true,
+  isInvalid = false,
+  errorMessage = "",
 }) => {
   const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show); 
+  const handleClick = () => setShow(!show);
 
   return (
-    <FormControl isRequired={isRequired}>
+    <FormControl isRequired={isRequired} isInvalid={isInvalid}>
       <FormLabel>{label}</FormLabel>
       <InputGroup>
         <Input
@@ -36,6 +39,7 @@ const PasswordInput = ({
           </Button>
         </InputRightElement>
       </InputGroup>
+      {isInvalid && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
     </FormControl>
   );
 };
