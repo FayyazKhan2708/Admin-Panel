@@ -5,10 +5,14 @@
   "scripts": {
     "build": "cd client && npm install && npm run build",
     "start": "cd server && npm install && node index.js",
-    "dev": "cd server && npm run dev"
+    "dev": "cd server && npm run dev",
+    "vercel-build": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }

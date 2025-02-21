@@ -5,11 +5,16 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import User from './models/User.js';
 
+const path = require('path');
 const app = express();
 dotenv.config();
 
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(cors());
 app.use(express.json());
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 mongoose
   .connect(process.env.MONGODB_URI)
