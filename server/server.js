@@ -1,12 +1,12 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import User from './models/User.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import express from "express";
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import cors from "cors";
+import dotenv from "dotenv";
+import User from "./models/User.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,17 +14,17 @@ const __dirname = dirname(__filename);
 const app = express();
 dotenv.config();
 
-app.use(express.static(path.join(__dirname, '../client/build')));
-app.use(cors());
-app.use(express.json());
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB successfully!"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(cors());
+app.use(express.json());
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 //Signup endpoint with proper password hashing
 app.post("/signup", async (req, res) => {
