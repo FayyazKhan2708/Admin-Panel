@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && node index.js",
+    "dev": "cd server && npm run dev",
+    "vercel-build": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "type": "module",
   "engines": {
     "node": ">=14.0.0"
   }
