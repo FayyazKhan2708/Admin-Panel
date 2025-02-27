@@ -22,11 +22,8 @@ mongoose
 app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(cors());
 app.use(express.json());
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-});
 
-//Signup endpoint with proper password hashing
+// First define all your API routes
 app.post("/signup", async (req, res) => {
   console.log("Received signup request:", req.body);
 
@@ -78,7 +75,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Login endpoint with proper password comparison
 app.post("/login", async (req, res) => {
   console.log("Received login request:", req.body);
 
@@ -150,9 +146,14 @@ app.post("/test-signup", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+// Then add the static file serving and catch-all route at the end
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
