@@ -10,6 +10,9 @@ import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+// const uri =
+//   "mongodb+srv://fayyazkhan3136:oX5hETf1VxlsIs88@cluster0.gylej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const client = new MongoClient(uri);
 
 const app = express();
 dotenv.config();
