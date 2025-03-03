@@ -45,7 +45,6 @@ const LoginPage = () => {
 
     console.log("Attempting login with:", {
       email: formData.email,
-      // Don't log the actual password in production
     });
 
     try {
@@ -65,6 +64,9 @@ const LoginPage = () => {
       console.log("Response data:", data);
 
       if (response.status === 200 && data.success) {
+        // Store the JWT token
+        localStorage.setItem("token", data.token);
+
         toast({
           title: "Login Successful",
           description: "Welcome back!",

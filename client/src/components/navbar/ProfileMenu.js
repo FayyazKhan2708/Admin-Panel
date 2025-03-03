@@ -7,16 +7,30 @@ import {
   MenuDivider,
   Avatar,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
   const navigate = useNavigate();
+  const toast = useToast();
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const hoverBg = useColorModeValue("gray.50", "gray.700");
 
   const handleSignOut = () => {
+    // Log the token before deletion
+    console.log("Token before deletion:", localStorage.getItem("token"));
+    localStorage.removeItem("token");
+    console.log("Token after deletion:", localStorage.getItem("token")); // Should show null
+
+    toast({
+      title: "Signed Out Successfully",
+      description: "You have been logged out",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
     navigate("/login", { replace: true });
   };
 
