@@ -1,22 +1,52 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/Dashboard";
 import SignUpPage from "./pages/SignUpPage";
+import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-const App = () => {
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* Redirect to login page by default */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>  
+    </Router>
   );
-};
+}
 
 export default App;
